@@ -20,7 +20,7 @@ type AppState = { projects: Project[]; entries: Entry[]; allocations: Allocation
 
 const CURRENT_VENDOR = "VT";
 const STORAGE_KEY = "corporate-solution-timesheet-v4";
-const DEMO_CCB_EMAIL = "Jackzhong@lululemon.com";
+const DEMO_CCB_EMAIL = "jackyzhong@lululemon.com";
 const DEMO_CCB_PASSWORD = "123";
 
 const seed: AppState = {
