@@ -13,15 +13,16 @@ async function render() {
   );
 }
 
-test("server-renders Project Dashboard as the homepage", async () => {
+test("server-renders Corporate Solution sign-in as the homepage", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<title>Corporate Solution Timesheet/);
-  assert.match(html, /Project Dashboard/);
-  assert.match(html, /Jacky — CCB/);
-  assert.match(html, /Create CSCOP/);
+  assert.match(html, /Sign in Corporate Solution Timesheet/);
+  assert.match(html, /Username or email address/);
+  assert.match(html, /Password/);
+  assert.doesNotMatch(html, /Project Dashboard/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview/);
 });
 

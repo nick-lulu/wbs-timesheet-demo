@@ -88,6 +88,21 @@ function RoleLogin({ role, onChange }: { role: Role; onChange: (role: Role) => v
   return <div className="login-role"><label htmlFor="login-role">Logged in as</label><div className="login-role-select"><select id="login-role" value={role} onChange={event => onChange(event.target.value as Role)}><option value="CCB">Jacky — CCB</option><option value="PgM">Iris — PgM</option><option value="Vendor PM">John — VT Vendor PM</option></select></div><small>Menu and records update by role</small></div>;
 }
 
+function SignIn({ onSignIn }: { onSignIn: () => void }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!username.trim() || !password) {
+      setMessage("Enter your username and password to continue.");
+      return;
+    }
+    onSignIn();
+  };
+  return <main className="sign-in-page"><section className="sign-in-card"><img className="sign-in-logo" src="./lululemon-logo.png" alt="lululemon" /><h1>Sign in Corporate Solution Timesheet</h1><form className="sign-in-form" onSubmit={submit}><label>Username or email address<input autoFocus autoComplete="username" value={username} onChange={event => { setUsername(event.target.value); setMessage(""); }} /></label><label><span className="sign-in-password-head"><span>Password</span><button type="button" onClick={() => setMessage("Please contact Corporate Solution support to reset your password.")}>Forgot password?</button></span><input type="password" autoComplete="current-password" value={password} onChange={event => { setPassword(event.target.value); setMessage(""); }} /></label>{message && <p className="sign-in-message" role="alert">{message}</p>}<button className="sign-in-submit" type="submit">Sign in</button></form><div className="sign-in-note"><b>Corporate Solution access</b><p>CCB, PgM and Vendor PM workspaces are separated by role.</p><small>Demo: enter any username and password.</small></div></section></main>;
+}
+
 function Topbar({ title, role }: { title: string; role: Role }) {
   return <header className="topbar"><div><div className="eyebrow">Corporate Solution Timesheet · FY26</div><h1>{title}</h1></div><div className="top-actions"><div className="role-identity active-role"><span>{roleNames[role]}</span><small>{role === "Vendor PM" ? "VT workspace" : "Role-specific workspace"}</small></div><div className="avatar">{identities[role].name.split(" ").map(part => part[0]).join("")}</div></div></header>;
 }
@@ -183,6 +198,7 @@ function ProjectAudit({ state, save, open }: { state: AppState; save: (state: Ap
 }
 
 export default function Home() {
+  const [signedIn, setSignedIn] = useState(false);
   const [view, setView] = useState<View>("dashboard");
   const [role, setRole] = useState<Role>("CCB");
   const [state, setState] = useState<AppState>(seed);
@@ -206,5 +222,6 @@ export default function Home() {
   };
   const addProject = (project: Project) => { save({ ...state, projects: [project, ...state.projects] }, `${project.code} created and added to Project Dashboard`); setView("dashboard"); };
   const changeRole = (next: Role) => { setRole(next); if (!roleViews[next].includes(view)) setView("dashboard"); };
+  if (!signedIn) return <SignIn onSignIn={() => setSignedIn(true)} />;
   return <main className="app-shell"><aside className="sidebar"><div className="brand"><div className="brand-mark">C</div><div><b>Corporate Solution Timesheet</b><span>FY26 SOP workspace</span></div></div><nav>{["Overview", "Planning", "Execution", "Governance"].map(section => { const items = visibleNav.filter(item => item.section === section); return items.length ? <div className="nav-section" key={section}><span>{section}</span>{items.map(item => <button key={item.id} className={view === item.id ? "active" : ""} onClick={() => setView(item.id)}><i>{item.icon}</i>{item.label}{item.id === "audit" && <em>{state.projects.filter(project => !project.pgmComplete).length}</em>}</button>)}</div> : null; })}</nav><div className="sidebar-foot"><RoleLogin role={role} onChange={changeRole} /><div className="user"><div className="avatar">{identities[role].name.split(" ").map(part => part[0]).join("")}</div><div><b>{identities[role].name}</b><span>{role === "Vendor PM" ? `${CURRENT_VENDOR} Vendor PM` : role}</span></div></div></div></aside><div className="workspace"><Topbar title={current.label} role={role} />{view === "flow" && <Flow open={setView} />}{view === "dashboard" && <ProjectDashboard state={state} role={role} open={setView} />}{view === "create" && role === "CCB" && <CreateCscop addProject={addProject} />}{view === "allocation" && role === "Vendor PM" && <AllocationWorkspace state={state} role={role} save={save} />}{view === "timesheet" && <ActualTimesheet state={state} role={role} save={save} />}{view === "audit" && role === "PgM" && <ProjectAudit state={state} save={save} open={setView} />}</div><Toast text={toast} /></main>;
 }
