@@ -22,7 +22,9 @@ test("server-renders Corporate Solution sign-in as the homepage", async () => {
   assert.match(html, /Sign in Corporate Solution Timesheet/);
   assert.match(html, /Username or email address/);
   assert.match(html, /Password/);
-  assert.doesNotMatch(html, /Project Dashboard/);
+  assert.match(html, /Jackzhong@lululemon\.com/);
+  assert.match(html, /Jacky — CCB demo account/);
+  assert.doesNotMatch(html, /class="app-shell"/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview/);
 });
 

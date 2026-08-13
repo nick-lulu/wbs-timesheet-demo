@@ -20,6 +20,8 @@ type AppState = { projects: Project[]; entries: Entry[]; allocations: Allocation
 
 const CURRENT_VENDOR = "VT";
 const STORAGE_KEY = "corporate-solution-timesheet-v4";
+const DEMO_CCB_EMAIL = "Jackzhong@lululemon.com";
+const DEMO_CCB_PASSWORD = "123";
 
 const seed: AppState = {
   projects: [
@@ -98,9 +100,13 @@ function SignIn({ onSignIn }: { onSignIn: () => void }) {
       setMessage("Enter your username and password to continue.");
       return;
     }
+    if (username.trim().toLowerCase() !== DEMO_CCB_EMAIL.toLowerCase() || password !== DEMO_CCB_PASSWORD) {
+      setMessage("Incorrect email or password. Please use the demo CCB account shown below.");
+      return;
+    }
     onSignIn();
   };
-  return <main className="sign-in-page"><section className="sign-in-card"><img className="sign-in-logo" src="./lululemon-logo.png" alt="lululemon" /><h1>Sign in Corporate Solution Timesheet</h1><form className="sign-in-form" onSubmit={submit}><label>Username or email address<input autoFocus autoComplete="username" value={username} onChange={event => { setUsername(event.target.value); setMessage(""); }} /></label><label><span className="sign-in-password-head"><span>Password</span><button type="button" onClick={() => setMessage("Please contact Corporate Solution support to reset your password.")}>Forgot password?</button></span><input type="password" autoComplete="current-password" value={password} onChange={event => { setPassword(event.target.value); setMessage(""); }} /></label>{message && <p className="sign-in-message" role="alert">{message}</p>}<button className="sign-in-submit" type="submit">Sign in</button></form><div className="sign-in-note"><b>Corporate Solution access</b><p>CCB, PgM and Vendor PM workspaces are separated by role.</p><small>Demo: enter any username and password.</small></div></section></main>;
+  return <main className="sign-in-page"><section className="sign-in-card"><img className="sign-in-logo" src="./lululemon-logo.png" alt="lululemon" /><h1>Sign in Corporate Solution Timesheet</h1><form className="sign-in-form" onSubmit={submit}><label>Username or email address<input autoFocus autoComplete="username" value={username} onChange={event => { setUsername(event.target.value); setMessage(""); }} placeholder={DEMO_CCB_EMAIL} /></label><label><span className="sign-in-password-head"><span>Password</span><button type="button" onClick={() => setMessage("Please contact Corporate Solution support to reset your password.")}>Forgot password?</button></span><input type="password" autoComplete="current-password" value={password} onChange={event => { setPassword(event.target.value); setMessage(""); }} placeholder="Enter password" /></label>{message && <p className="sign-in-message" role="alert">{message}</p>}<button className="sign-in-submit" type="submit">Sign in</button></form><div className="sign-in-note"><b>Jacky — CCB demo account</b><p>{DEMO_CCB_EMAIL}</p><small>Password: {DEMO_CCB_PASSWORD} · Opens the CCB Project Dashboard</small></div></section></main>;
 }
 
 function Topbar({ title, role }: { title: string; role: Role }) {
@@ -222,6 +228,6 @@ export default function Home() {
   };
   const addProject = (project: Project) => { save({ ...state, projects: [project, ...state.projects] }, `${project.code} created and added to Project Dashboard`); setView("dashboard"); };
   const changeRole = (next: Role) => { setRole(next); if (!roleViews[next].includes(view)) setView("dashboard"); };
-  if (!signedIn) return <SignIn onSignIn={() => setSignedIn(true)} />;
+  if (!signedIn) return <SignIn onSignIn={() => { setRole("CCB"); setView("dashboard"); setSignedIn(true); }} />;
   return <main className="app-shell"><aside className="sidebar"><div className="brand"><div className="brand-mark">C</div><div><b>Corporate Solution Timesheet</b><span>FY26 SOP workspace</span></div></div><nav>{["Overview", "Planning", "Execution", "Governance"].map(section => { const items = visibleNav.filter(item => item.section === section); return items.length ? <div className="nav-section" key={section}><span>{section}</span>{items.map(item => <button key={item.id} className={view === item.id ? "active" : ""} onClick={() => setView(item.id)}><i>{item.icon}</i>{item.label}{item.id === "audit" && <em>{state.projects.filter(project => !project.pgmComplete).length}</em>}</button>)}</div> : null; })}</nav><div className="sidebar-foot"><RoleLogin role={role} onChange={changeRole} /><div className="user"><div className="avatar">{identities[role].name.split(" ").map(part => part[0]).join("")}</div><div><b>{identities[role].name}</b><span>{role === "Vendor PM" ? `${CURRENT_VENDOR} Vendor PM` : role}</span></div></div></div></aside><div className="workspace"><Topbar title={current.label} role={role} />{view === "flow" && <Flow open={setView} />}{view === "dashboard" && <ProjectDashboard state={state} role={role} open={setView} />}{view === "create" && role === "CCB" && <CreateCscop addProject={addProject} />}{view === "allocation" && role === "Vendor PM" && <AllocationWorkspace state={state} role={role} save={save} />}{view === "timesheet" && <ActualTimesheet state={state} role={role} save={save} />}{view === "audit" && role === "PgM" && <ProjectAudit state={state} save={save} open={setView} />}</div><Toast text={toast} /></main>;
 }
