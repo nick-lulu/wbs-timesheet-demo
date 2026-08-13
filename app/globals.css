@@ -38,8 +38,8 @@
 /* Corporate Solution sign-in */
 .sign-in-page{min-height:100vh;background:#0d1117;color:#f7f8fa;display:grid;place-items:center;padding:42px 20px;font-family:var(--font-sans),Arial,sans-serif}
 .sign-in-card{width:min(440px,100%)}
-.sign-in-logo-wrap{height:82px;display:grid;place-items:center;margin:0 auto 34px;overflow:visible}
-.sign-in-logo{display:block;width:82px;height:74px;object-fit:contain;transform:scale(1.55);transform-origin:center;filter:drop-shadow(0 8px 20px #0008)}
+.sign-in-logo-wrap{height:46px;display:flex;align-items:center;justify-content:flex-start;margin:0 0 22px;overflow:visible}
+.sign-in-logo{display:block;width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 6px 14px #0007)}
 .sign-in-card h1{font-size:31px;line-height:1.18;letter-spacing:-.035em;margin:0 0 42px;color:#fff;font-weight:750}
 .sign-in-form{display:grid;gap:24px}
 .sign-in-form label{display:grid;gap:11px;color:#fff;font-size:16px;font-weight:700}
@@ -52,4 +52,4 @@
 .sign-in-submit{height:51px;border:0;border-radius:10px;background:#238636;color:#fff;font-size:17px;font-weight:750;cursor:pointer;transition:background .18s,transform .18s}
 .sign-in-submit:hover{background:#2ea043;transform:translateY(-1px)}
 .sign-in-submit:active{transform:none}
-@media(max-width:520px){.sign-in-page{align-items:start;padding-top:54px}.sign-in-logo-wrap{margin-bottom:28px}.sign-in-card h1{font-size:27px;margin-bottom:34px}}
+@media(max-width:520px){.sign-in-page{align-items:start;padding-top:54px}.sign-in-logo-wrap{margin-bottom:20px}.sign-in-card h1{font-size:27px;margin-bottom:34px}}
