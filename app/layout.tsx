@@ -14,20 +14,20 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:8081"),
-  title: "WBS Timesheet · Closed-loop Project Governance",
+  title: "Corporate Solution Timesheet",
   description: "High-fidelity operating model for CSCOP planning, delivery, timesheets and audit governance.",
   icons: {
     icon: "/lululemon-logo.png",
     shortcut: "/lululemon-logo.png",
   },
   openGraph: {
-    title: "WBS Timesheet",
+    title: "Corporate Solution Timesheet",
     description: "One project record. A complete delivery loop.",
     images: [{ url: "/og.png", width: 1672, height: 941 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WBS Timesheet",
+    title: "Corporate Solution Timesheet",
     description: "One project record. A complete delivery loop.",
     images: ["/og.png"],
   },

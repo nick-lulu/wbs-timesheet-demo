@@ -18,7 +18,7 @@ test("server-renders Project Dashboard as the homepage", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  assert.match(html, /<title>WBS Timesheet/);
+  assert.match(html, /<title>Corporate Solution Timesheet/);
   assert.match(html, /Project Dashboard/);
   assert.match(html, /Jacky — CCB/);
   assert.match(html, /Create CSCOP/);
