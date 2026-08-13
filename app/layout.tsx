@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   title: "WBS Timesheet · Closed-loop Project Governance",
   description: "High-fidelity operating model for CSCOP planning, delivery, timesheets and audit governance.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/lululemon-logo.png",
+    shortcut: "/lululemon-logo.png",
   },
   openGraph: {
     title: "WBS Timesheet",
