@@ -185,7 +185,7 @@ export default function Home() {
   const [state, setState] = useState<AppState>(seed);
   const [toast, setToast] = useState("");
   const roleViews: Record<Role, View[]> = {
-    CCB: ["dashboard", "create", "flow"],
+    CCB: ["dashboard", "create"],
     PgM: ["dashboard", "timesheet", "audit"],
     "Vendor PM": ["dashboard", "allocation", "timesheet"],
   };
