@@ -38,4 +38,6 @@ test("source defines role-specific access and personal time entry", async () => 
   assert.match(page, /Submit My Timesheet/);
   assert.match(page, /Section 2 · Vendor Submitted Mandays/);
   assert.match(page, /useState<View>\("dashboard"\)/);
+  assert.match(page, /CCB: \{ name: "Jacky Zhong"/);
+  assert.doesNotMatch(page, /Jacky Chen/);
 });

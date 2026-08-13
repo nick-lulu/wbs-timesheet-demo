@@ -54,7 +54,7 @@ const nav: { id: View; label: string; icon: string; section: string }[] = [
 
 const roleNames: Record<Role, string> = { CCB: "Jacky — CCB", PgM: "Iris — PgM", "Vendor PM": "John — VT Vendor PM" };
 const identities: Record<Role, { name: string; vendor: string }> = {
-  CCB: { name: "Jacky Chen", vendor: "Internal" },
+  CCB: { name: "Jacky Zhong", vendor: "Internal" },
   PgM: { name: "Iris Jin", vendor: "Internal" },
   "Vendor PM": { name: "John Lee", vendor: CURRENT_VENDOR },
 };
