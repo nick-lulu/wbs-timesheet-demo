@@ -19,7 +19,8 @@ test("server-renders Corporate Solution sign-in as the homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<title>Corporate Solution Timesheet/);
-  assert.match(html, /Sign in Corporate Solution Timesheet/);
+  assert.match(html, />Corporate Solution Timesheet<\/h1>/);
+  assert.doesNotMatch(html, /Sign in Corporate Solution Timesheet/);
   assert.match(html, /Username or email address/);
   assert.match(html, /Password/);
   assert.match(html, /jackyzhong@lululemon\.com/);
