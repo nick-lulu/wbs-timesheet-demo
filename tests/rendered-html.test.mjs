@@ -24,7 +24,7 @@ test("server-renders Corporate Solution sign-in as the homepage", async () => {
   assert.match(html, /Username or email address/);
   assert.match(html, /Password/);
   assert.match(html, /jackyzhong@lululemon\.com/);
-  assert.match(html, /Jacky — CCB demo account/);
+  assert.doesNotMatch(html, /Jacky — CCB demo account|Opens the CCB Project Dashboard/);
   assert.doesNotMatch(html, /class="app-shell"/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview/);
 });
