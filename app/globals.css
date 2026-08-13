@@ -27,6 +27,7 @@
 .timesheet-context{border-bottom:1px solid var(--line);padding-bottom:18px}
 .timesheet-context label{min-width:0}
 .hours-metric{display:flex;align-items:baseline;gap:6px}
+.metrics .hours-metric>span{font-size:29px;font-weight:700;line-height:1;color:var(--ink);letter-spacing:-.04em}
 .hours-metric em{font-size:11px!important;font-weight:700;color:#7d899a;letter-spacing:0}
 .allocation-lock-notice{margin:0 0 17px;padding:15px 18px;border:1px solid #edcf8a;border-radius:12px;background:#fff8e9;color:#6b5014}
 .allocation-lock-notice strong{display:block;font-size:11px}
