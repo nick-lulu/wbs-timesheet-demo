@@ -35,6 +35,21 @@
 .brand>div:last-child{min-width:0}.brand b{line-height:1.25}
 @media(max-width:760px){.project-row-button{min-width:750px}.timesheet-context{grid-template-columns:1fr}}
 
+/* Meeting feedback: Initiative portfolio, PgM lifecycle and decimal Mandays */
+.dashboard-actions{display:flex;align-items:center;gap:10px}
+.initiative-table{width:100%;overflow:auto}
+.initiative-row{display:grid;grid-template-columns:1.55fr 1.35fr .72fr .72fr 1fr .68fr;gap:14px;align-items:center;min-width:980px;min-height:70px;padding:14px 20px;border-bottom:1px solid var(--line);font-size:10px}
+.initiative-row:last-child{border-bottom:0}.initiative-row>span b,.initiative-row>span small{display:block}.initiative-row>span small{font-size:8px;color:#8792a3;margin-top:5px;line-height:1.4}.initiative-row>strong{font-size:12px}.initiative-head{min-height:38px;background:#fafbfc;color:#8993a3;text-transform:uppercase;font-size:8px;font-weight:800}.project-code-list{color:#246bfe!important}
+.allocation-list-row{grid-template-columns:1.7fr .7fr .7fr .85fr .75fr 34px}
+.allocation-summary-row{grid-template-columns:1fr .9fr 1fr .8fr}
+.allocation-selection{grid-template-columns:1.5fr 1fr .75fr auto}
+.pgm-path-options{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:20px 22px}
+.pgm-path-options button{min-height:86px;border:1px solid #dce3eb;border-radius:13px;background:#fff;padding:17px 18px;text-align:left;color:var(--ink);cursor:pointer}
+.pgm-path-options button.selected{border:2px solid #246bfe;padding:16px 17px;background:#f4f8ff;box-shadow:0 7px 18px #246bfe14}
+.pgm-path-options button.delivery.selected{border-color:#0ba676;background:#f1fbf6}.pgm-path-options b,.pgm-path-options span{display:block}.pgm-path-options b{font-size:12px}.pgm-path-options span{font-size:9px;color:#7b8799;margin-top:7px;line-height:1.45}.path-governance fieldset{border:0;padding:0;margin:0}.path-governance fieldset:disabled{opacity:.72}.matrix-input{padding:0 3px}
+@media(max-width:900px){.dashboard-panel-head{align-items:flex-start;gap:14px}.dashboard-actions{align-items:flex-end;flex-direction:column}.pgm-path-options{grid-template-columns:1fr}.allocation-selection{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.dashboard-actions{width:100%;align-items:stretch}.dashboard-actions .segmented{justify-content:stretch}.dashboard-actions .segmented button{flex:1}.allocation-selection{grid-template-columns:1fr}}
+
 /* Corporate Solution sign-in */
 .sign-in-page{min-height:100vh;background:#0d1117;color:#f7f8fa;display:grid;place-items:center;padding:42px 20px;font-family:var(--font-sans),Arial,sans-serif}
 .sign-in-card{width:min(440px,100%)}

@@ -41,3 +41,18 @@ test("source defines role-specific access and personal time entry", async () => 
   assert.match(page, /CCB: \{ name: "Jacky Zhong"/);
   assert.doesNotMatch(page, /Jacky Chen/);
 });
+
+test("source implements the agreed Initiative, PgM and Manday changes", async () => {
+  const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+  assert.match(page, /Initiative Dashboard/);
+  assert.match(page, /one Initiative can contain multiple CSCOP projects/);
+  assert.match(page, /Create CSCOP Project Master/);
+  assert.match(page, /CCB owns the Project master and Vendor List/);
+  assert.match(page, /Assigned PM · PgM editable/);
+  assert.match(page, /4 · Start Date/);
+  assert.match(page, /5 · Due Date/);
+  assert.match(page, /step="0\.01"/);
+  assert.match(page, /const md = \(value: number\)/);
+  assert.doesNotMatch(page, />Quarter</);
+  assert.doesNotMatch(page, /Original Initiative/);
+});
