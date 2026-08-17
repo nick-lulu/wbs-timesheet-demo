@@ -53,6 +53,13 @@ test("source implements the agreed Initiative, PgM and Manday changes", async ()
   assert.match(page, /5 · Due Date/);
   assert.match(page, /step="0\.01"/);
   assert.match(page, /const md = \(value: number\)/);
+  assert.match(page, /Section 1 · PgM Project Information/);
+  assert.match(page, /This information is synchronized from the PgM workspace/);
+  assert.match(page, /item\.code === project\.code \? updated : item/);
+  assert.match(page, /brdSignoffDate: gw1, techReleaseDate: gw4/);
+  assert.match(page, /No workflow status restriction/);
+  assert.doesNotMatch(page, /planningEnabled|PgM readiness controls editing|Allocation locked/);
+  assert.doesNotMatch(page, /PgM Mandatory Metadata/);
   assert.doesNotMatch(page, />Quarter</);
   assert.doesNotMatch(page, /Original Initiative/);
 });
